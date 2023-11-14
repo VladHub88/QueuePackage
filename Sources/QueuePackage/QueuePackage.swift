@@ -6,7 +6,7 @@ import Foundation
 public protocol Queue {
     associatedtype Element
     @discardableResult mutating func enqueue(_ element: Element) -> Bool
-    mutating func dequeue() -> Element?
+    @discardableResult mutating func dequeue() -> Element?
     var isEmpty: Bool { get }
     var peek: Element? { get }
 }
@@ -23,12 +23,12 @@ public struct QueueArray<T>: Queue {
         array.first
     }
     
-    public mutating func enqueue(_ element: T) -> Bool {
+    @discardableResult public mutating func enqueue(_ element: T) -> Bool {
         array.append(element)
         return true
     }
     
-    public mutating func dequeue() -> T? {
+    @discardableResult public mutating func dequeue() -> T? {
         isEmpty ? nil : array.removeFirst()
     }
 }
